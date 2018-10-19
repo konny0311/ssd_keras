@@ -47,6 +47,12 @@ class Normalize(Layer):
         output = K.l2_normalize(x, self.axis)
         output *= self.gamma
         return output
+    
+    # これが無いとkeras.models.load_model(modelSavePath:str)した時に"__init__() missing 1 required positional argument: '"が出る
+    def get_config(self):
+        config = {'scale': self.scale}
+        base_config = super(Normalize, self).get_config()
+        return dict(list(base_config.items()) + list(config.items()))
 
 
 class PriorBox(Layer):
