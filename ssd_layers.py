@@ -48,7 +48,7 @@ class Normalize(Layer):
         output *= self.gamma
         return output
     
-    # これが無いとkeras.models.load_model(modelSavePath:str)した時に"__init__() missing 1 required positional argument: '"が出る
+    # This function is necessary for keras.models.load_model(modelSavePath:str), instead you'll get '__init__() missing 1 required positional argument: ' error
     def get_config(self):
         config = {'scale': self.scale}
         base_config = super(Normalize, self).get_config()
